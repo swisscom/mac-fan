@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-  echo "Usage: $0 normal|max"
+  echo "Usage: $0 auto|min|normal|max"
 fi
 
 MODE="$1"
@@ -18,7 +18,7 @@ function fan_speed(){
   TARGET_FAN="$1"
   SPEED="$2"
 
-  "$SMC" -k "F${TARGET_FAN}Tg" -w $(to_smc_hex "$2")
+  "$SMC" -k "F${TARGET_FAN}Tg" -w "$(to_smc_hex "$SPEED")"
 }
 
 "$SMC" -k "F0Md" -w 01
