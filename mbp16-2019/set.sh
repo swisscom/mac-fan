@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
-. utils.sh
+SCRIPT_HOME=$( dirname -- "$0"; )
+. "$SCRIPT_HOME/utils.sh"
 
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ]; then
   echo "Usage: $0 auto|min|normal|high|max"
+  exit 1
 fi
 
 MODE="$1"
@@ -37,6 +39,12 @@ case "$MODE" in
     fan_speed 1 3000 
     ;;
 
+  mid-high)
+    echo "Mid-High speed"
+    fan_speed 0 4000
+    fan_speed 1 4000
+    ;;
+
   high)
     echo "High speed"
     fan_speed 0 5000
@@ -47,6 +55,12 @@ case "$MODE" in
     echo "MAX speed"
     fan_speed 0 7500
     fan_speed 1 7500
+    ;;
+
+  custom)
+    echo "Setting fans to $2"
+    fan_speed 0 "$2"
+    fan_speed 1 "$2"
     ;;
 
   *)

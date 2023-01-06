@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-. utils.sh
+SCRIPT_HOME=$( dirname -- "$0"; )
+. "$SCRIPT_HOME/utils.sh"
 
 F0_TARGET_BYTES=$(get_bytes "F0Tg")
 F0_MIN_BYTES=$(get_bytes "F0Mn")
